@@ -1,0 +1,12 @@
+{
+    "name": "mixtape-backend-dev-container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": ["rust-lang.rust-analyzer"]
+        }
+    }
+}
