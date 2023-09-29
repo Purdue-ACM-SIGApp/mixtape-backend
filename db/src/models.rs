@@ -4,12 +4,12 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize,Deserialize)]
 struct Playlist {
-    id: ObjectId,
+    id: Option<ObjectId>,
     name: String,
-    owner: ObjectId,
+    owner: Option<ObjectId>,
     service_id: String,
     songs: Vec<Song>,
-    collaborators: Vec<ObjectId>,
+    collaborators: Vec<Option<ObjectId>>,
     privacy: PlaylistPrivacy,
     description: String, 
 }
@@ -44,6 +44,6 @@ enum PlaylistPrivacy {
 
 #[derive(Debug, Serialize,Deserialize)]
 enum QueueContributor {
-    User(ObjectId),
+    User(Option<ObjectId>),
     NonUser(String),
 }
