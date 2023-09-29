@@ -1,4 +1,4 @@
-use mongodb::bson::Timestamp;
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -11,7 +11,7 @@ struct TempNumber {
 enum VerificationStatus {
     NotVerified {
         code: String,
-        expiration: Timestamp
+        expiration: DateTime<Utc>,
     },
     Verified,
 }
