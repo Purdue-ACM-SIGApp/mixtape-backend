@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 
 #[derive(Debug,Deserialize,Serialize)]
-struct User {
+pub struct User {
     id: Option<ObjectId>,
     phonenumber: String,
     name: String,
@@ -16,15 +16,15 @@ struct User {
 
 
 #[derive(Debug,Deserialize,Serialize)]
-struct Session {
+pub struct Session {
 
 }
 #[derive(Debug,Deserialize,Serialize)]
-struct UserDevice {
+pub struct UserDevice {
 
 }
 #[derive(Debug,Deserialize,Serialize)]
-enum MusicService {
+pub enum MusicService {
     Spotify,
     AppleMusic,
 }
