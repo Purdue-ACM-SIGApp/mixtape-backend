@@ -18,15 +18,15 @@ enum VerificationStatus {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-struct Friend {
-    id: ObjectId,
-    initiales: ObjectId,
-    target: ObjectId,
-    status: FriendStatus,
+pub struct Friend {
+    pub id: ObjectId,
+    pub initiales: ObjectId,
+    pub target: ObjectId,
+    pub status: FriendStatus,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-enum FriendStatus {
+pub enum FriendStatus {
     InitialesRequested,
     Accepted,
 }
