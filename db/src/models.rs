@@ -4,14 +4,14 @@ use chrono::{DateTime, Utc};
 
 #[derive(Debug,Deserialize,Serialize)]
 pub struct User {
-    id: Option<ObjectId>,
-    phonenumber: String,
-    name: String,
-    username: String,
-    sessions: Vec<Session>,
-    devices: Vec<UserDevice>,
-    last_active: DateTime<Utc>,
-    service: Vec<MusicService>
+    pub id: Option<ObjectId>,
+    pub phonenumber: String,
+    pub name: String,
+    pub username: String,
+    pub sessions: Vec<Session>,
+    pub devices: Vec<UserDevice>,
+    pub last_active: DateTime<Utc>,
+    pub service: Vec<MusicService>
 }
 
 
