@@ -2,6 +2,13 @@ use mongodb::bson::oid::ObjectId;
 use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Block {
+    pub id: Option<ObjectId>,
+    pub initiator: ObjectId,
+    pub target: ObjectId,
+}
+
 #[derive(Debug,Deserialize,Serialize)]
 pub struct User {
     pub id: Option<ObjectId>,
