@@ -4,7 +4,7 @@ use serde::Deserialize;
 
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Block {
+pub struct Block {
     pub id: Option<ObjectId>,
     pub initiator: ObjectId,
     pub target: ObjectId,
