@@ -4,29 +4,29 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Serialize,Deserialize)]
 pub struct Playlist {
-    id: Option<ObjectId>,
-    name: String,
-    owner: Option<ObjectId>,
-    service_id: String,
-    songs: Vec<Song>,
-    collaborators: Vec<Option<ObjectId>>,
-    privacy: PlaylistPrivacy,
-    description: String, 
+    pub id: Option<ObjectId>,
+    pub name: String,
+    pub owner: Option<ObjectId>,
+    pub service_id: String,
+    pub songs: Vec<Song>,
+    pub collaborators: Vec<Option<ObjectId>>,
+    pub privacy: PlaylistPrivacy,
+    pub description: String, 
 }
 
 #[derive(Debug, Serialize,Deserialize)]
 pub struct Song {
-    service_id: String,
-    name: String,
-    artist: Vec<String>,
-    album: String,
+    pub service_id: String,
+    pub name: String,
+    pub artist: Vec<String>,
+    pub album: String,
 }
 
 
 #[derive(Debug, Serialize,Deserialize)]
 pub struct QueuedSong {
-    song: Song,
-    contributor: QueueContributor,
+    pub song: Song,
+    pub contributor: QueueContributor,
 }
 
 
