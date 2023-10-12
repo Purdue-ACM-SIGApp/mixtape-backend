@@ -3,7 +3,7 @@ use serde::{Serialize, Deserialize};
 
 
 #[derive(Debug, Serialize,Deserialize)]
-struct Playlist {
+pub struct Playlist {
     id: Option<ObjectId>,
     name: String,
     owner: Option<ObjectId>,
@@ -15,7 +15,7 @@ struct Playlist {
 }
 
 #[derive(Debug, Serialize,Deserialize)]
-struct Song {
+pub struct Song {
     service_id: String,
     name: String,
     artist: Vec<String>,
@@ -24,14 +24,14 @@ struct Song {
 
 
 #[derive(Debug, Serialize,Deserialize)]
-struct QueuedSong {
+pub struct QueuedSong {
     song: Song,
     contributor: QueueContributor,
 }
 
 
 #[derive(Debug, Serialize, Deserialize)]
-enum PlaylistPrivacy {
+pub enum PlaylistPrivacy {
     Locked,
 
     Open {
@@ -43,7 +43,7 @@ enum PlaylistPrivacy {
 
 
 #[derive(Debug, Serialize,Deserialize)]
-enum QueueContributor {
+pub enum QueueContributor {
     User(Option<ObjectId>),
     NonUser(String),
 }
