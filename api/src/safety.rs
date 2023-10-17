@@ -1,5 +1,4 @@
-use actix_web::{HttpResponse, Responder, route};
-use build_time::build_time_utc;
+use actix_web::{HttpResponse, Responder, route, web};
 
 pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
     cfg.service(block);
