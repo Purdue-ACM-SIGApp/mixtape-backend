@@ -4,6 +4,7 @@ use build_time::build_time_utc;
 pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
     cfg
     .service(test)
+    .service(delete_user)
     .service(delete_device)
     .service(add_device);
 }
@@ -13,6 +14,14 @@ async fn test() -> impl Responder {
     HttpResponse::Ok().body(format!(
         "Mixtape API Server TWO\nBuild Timestamp {}",
         build_time_utc!()
+    ))
+}
+
+#[route("/u/me", method = "DELETE")]
+async fn delete_user(user: AuthedUser) -> impl Responder {
+    HttpResponse::Ok().body(format!(
+        "Deleted user with id {}",
+        user.id,
     ))
 }
 
