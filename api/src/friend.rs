@@ -22,8 +22,8 @@ async fn delete_friend(path: web::Path<u32>) -> impl Responder {
 }
 
 #[route("/f/find", method= "POST")]
-async fn find_friend(request: web::Json<FindFriendRequest>) -> impl Responder {
-    let phone_numbers: Vec<String> = request.phone_numbers.clone();
+async fn find_friend(payload: web::Json<FindFriendRequest>) -> impl Responder {
+    let phone_numbers: Vec<String> = payload.phone_numbers.clone();
 
     HttpResponse::Ok().body(format!(
         "Found friends based upon these phone numbers: {:?}", phone_numbers
