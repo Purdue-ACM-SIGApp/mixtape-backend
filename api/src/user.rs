@@ -17,12 +17,22 @@ async fn test() -> impl Responder {
     ))
 }
 
+#[derive(Deserialize)]
+struct AuthedUser {
+    id: String,
+}
+
 #[route("/u/me", method = "DELETE")]
 async fn delete_user(user: AuthedUser) -> impl Responder {
     HttpResponse::Ok().body(format!(
         "Deleted user with id {}",
         user.id,
     ))
+}
+
+#[derive(Deserialize)]
+struct DeviceInfo {
+    id: String,
 }
 
 #[route("/u/me/device", method = "PUT")]
