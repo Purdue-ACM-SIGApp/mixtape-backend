@@ -13,7 +13,7 @@ use actix::{Actor, Addr};
 use actix_web::dev::Payload;
 use actix_web::http::StatusCode;
 use actix_web::web::Data;
-use actix_web::{route, App, FromRequest, HttpRequest, HttpResponse, HttpServer, Responder};
+use actix_web::{route, web, App, FromRequest, HttpRequest, HttpResponse, HttpServer, Responder};
 use anyhow::Result;
 use build_time::build_time_utc;
 use futures_util::lock::Mutex;
@@ -72,7 +72,7 @@ async fn main() -> std::io::Result<()> {
             .wrap(TracingLogger::default())
             .app_data(qs_config)
             .service(root)
-            .configure(user::config)
+            .service(web::scope("/u").configure(user::config))
     })
     .bind(("0.0.0.0", 80))?
     .run()
