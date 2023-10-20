@@ -30,6 +30,9 @@ use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
 use tracing_subscriber::{EnvFilter, Registry};
 
 mod user;
+mod friend;
+mod safety;
+mod playlist;
 
 #[route("/", method = "GET", method = "HEAD")]
 async fn root() -> impl Responder {
@@ -71,6 +74,9 @@ async fn main() -> std::io::Result<()> {
             .wrap(TracingLogger::default())
             .app_data(qs_config)
             .service(root)
+            .configure(friend::config)
+            .configure(playlist::config)
+            .configure(safety::config)
             .configure(user::config)
     })
     .bind(("0.0.0.0", 80))?
