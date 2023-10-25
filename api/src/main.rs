@@ -30,6 +30,7 @@ use tracing_subscriber::prelude::__tracing_subscriber_SubscriberExt;
 use tracing_subscriber::{EnvFilter, Registry};
 
 mod user;
+mod auth;
 
 
 #[route("/", method = "GET", method = "HEAD")]
