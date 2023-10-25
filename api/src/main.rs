@@ -45,6 +45,24 @@ struct QueryOffset {
     offset: Option<u32>,
 }
 
+struct State {
+    pub mongo_client: Client,
+    pub twilio_client: TwilioPhoneClient,
+}
+
+impl State {
+    pub async fn new() -> Result<Self> {
+        Ok(Self {
+            mongo_client: db::connect(dotenv!("DB_URI"), dotenv!("DB_NAME")).await?,
+            twilio_client: TwilioPhoneClient::new(),
+        })
+    }
+
+    pub fn database(&self) -> Database {
+        self.mongo_client.database(dotenv!("DB_NAME"))
+    }
+}
+
 #[allow(clippy::expect_used)]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -65,11 +83,16 @@ async fn main() -> std::io::Result<()> {
 
     openssl_probe::init_ssl_cert_env_vars();
 
+    let state = Data::new(State::new().await.expect("Unable to create State"));
+    let state_move = state.clone();
+
     HttpServer::new(move || {
+        let state_move = state_move.clone();
         let qs_config = QsQueryConfig::default().qs_config(Config::new(2, false));
 
         App::new()
             .wrap(TracingLogger::default())
+            .app_data(state_move)
             .app_data(qs_config)
             .service(root)
             .service(web::scope("/u").configure(user::config))

@@ -1,16 +1,13 @@
+use mongodb::{options::{ClientOptions, ConnectionString}, Client};
+use anyhow::Result;
+
 pub mod models;
 
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+pub async fn connect(uri: &str) -> Result<Client> {
+    let config = ClientOptions::parse_connection_string(ConnectionString::parse(uri)?)
+        .await?;
+    // config.tls = Some(Tls::Enabled(TlsOptions::default()));
+    let client = Client::with_options(config)?;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+    Ok(client)
 }
