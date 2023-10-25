@@ -4,9 +4,9 @@ use serde::Deserialize;
 
 pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
     cfg
-    .service(test)
-    .service(me)
-    .service(search);
+        .service(test)
+        .service(me)
+        .service(search);
 }
 
 #[route("/test", method = "GET", method = "HEAD")]
