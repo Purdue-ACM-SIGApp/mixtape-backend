@@ -9,23 +9,15 @@ pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
         .service(register);
 }
 
-#[route("/test", method = "GET", method = "HEAD")]
-async fn test() -> impl Responder {
-    HttpResponse::Ok().body(format!(
-        "Mixtape API Server TWO\nBuild Timestamp {}",
-        build_time_utc!()
-    ))
-}
-
 #[derive(Deserialize)]
 struct LoginInfo {
     phone_number : String,
-    code : String
+    code : String,
 
 }
 
-#[route("/auth", method = "PUT")]
-async fn auth(login_info: web::Json<LoginInfo>, data: Data<State>) -> impl Responder {
+#[route("/auth", method = "POST")]
+async fn auth(login_info: web::Json<LoginInfo>) -> impl Responder {
     if (login_info.code.is_empty()) {
         HttpResponse::Ok().body(format!(
             "User with phone number {} exists",
@@ -39,11 +31,19 @@ async fn auth(login_info: web::Json<LoginInfo>, data: Data<State>) -> impl Respo
     }
 }
 
-#[route("/register-phone", method = "PUT")]
-async fn register(login_info: web::Json<LoginInfo>, data: Data<State>) -> impl Responder {
+#[route("/register-phone", method = "POST")]
+async fn register(login_info: web::Json<LoginInfo>) -> impl Responder {
     HttpResponse::Ok().body(format!(
         "User with phone number {} has been registered",
         login_info.phone_number,
+    ))
+}
+
+#[route("/test", method = "GET", method = "HEAD")]
+async fn test() -> impl Responder {
+    HttpResponse::Ok().body(format!(
+        "Mixtape API Server TWO\nBuild Timestamp {}",
+        build_time_utc!()
     ))
 }
 
