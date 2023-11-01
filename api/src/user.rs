@@ -24,3 +24,11 @@ async fn me() -> impl Responder {
         "/u/me"
     })
 }
+
+#[route("/{id}", method = "GET")]
+async fn id(path: web::Path<u32>) -> impl Responder {
+    let id = path.into_inner();
+
+    HttpResponse::Created()
+        .content_type(id)
+}
