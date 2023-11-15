@@ -1,4 +1,8 @@
 use actix_web::{HttpResponse, Responder, route, web};
+use futures_util::TryStreamExt;
+use mongodb::bson::Document;
+
+use crate::State;
 
 pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
     cfg
@@ -10,7 +14,16 @@ pub fn config(cfg: &mut actix_web::web::ServiceConfig) {
 }
 
 #[route("/p/new", method = "POST")]
-async fn create_playlist() -> impl Responder {
+async fn create_playlist(data: web::Data<State>) -> impl Responder {
+    let db = data.database();
+    let collection = db.collection::<Document>("fakecollection");
+    let mut cursor = collection.find(None, None).await.unwrap();
+
+    while let Some(doc) = cursor.try_next().await.unwrap() {
+        // Print each document
+        println!("{:#?}", doc);
+    }
+
     HttpResponse::Ok().body(format!(
         "Created the playlist"
     ))
