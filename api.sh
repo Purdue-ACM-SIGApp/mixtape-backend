@@ -29,7 +29,7 @@ if [ "$2" = "push" ]; then
   echo unimplemented!
   exit 1
 else
-  docker buildx build --load -t "$TAG" --build-arg TARGET_CRATE=api --build-arg MONGO_URI=mongodb://localhost:27017/ --target webserver .
+  docker buildx build --load -t "$TAG" --build-arg TARGET_CRATE=api --build-arg MONGO_URI=mongodb://172.17.0.2:27017 --target webserver .
 fi
 
 docker stop "$MONGO_ID"
