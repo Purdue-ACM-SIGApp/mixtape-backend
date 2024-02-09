@@ -53,7 +53,7 @@ struct State {
 impl State {
     pub async fn new() -> Result<Self> {
         Ok(Self {
-            mongo_client: db::connect(dotenv!("DB_URI"), dotenv!("DB_NAME")).await?,
+            mongo_client: db::connect(dotenv!("DB_URI")).await?,
             twilio_client: TwilioPhoneClient::new(),
         })
     }
