@@ -1,0 +1,1 @@
+![CI status](https://jenkins.dev.sigapp.club/job/SIGAPP%20GitHub%20Organization/job/mixtape-backend/job/dev/badge/icon "CI status")
