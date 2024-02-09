@@ -19,7 +19,6 @@ pipeline {
         stage('Check') {
             steps {
                 sh 'printenv | grep dummy > .env'
-                sh 'printenv'
                 sh 'cargo check'
             }
         }
