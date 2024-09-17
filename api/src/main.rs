@@ -32,6 +32,7 @@ use tracing_subscriber::{EnvFilter, Registry};
 use utils::phone::TwilioPhoneClient;
 
 mod user;
+mod auth;
 
 
 #[route("/", method = "GET", method = "HEAD")]
@@ -98,6 +99,8 @@ async fn main() -> std::io::Result<()> {
             .app_data(qs_config)
             .service(root)
             .service(web::scope("/u").configure(user::config))
+            .service(auth::auth)
+            .service(auth::register)
     })
     .bind(("0.0.0.0", 80))?
     .run()

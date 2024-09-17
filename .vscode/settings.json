@@ -1,0 +1,8 @@
+{
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "dev"
+    ],
+    "rust-analyzer.linkedProjects": [
+        "./api/Cargo.toml"
+    ]
+}
