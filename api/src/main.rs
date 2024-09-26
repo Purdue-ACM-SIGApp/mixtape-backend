@@ -32,7 +32,9 @@ use tracing_subscriber::{EnvFilter, Registry};
 use utils::phone::TwilioPhoneClient;
 
 mod user;
-
+mod friend;
+mod safety;
+mod playlist;
 
 #[route("/", method = "GET", method = "HEAD")]
 async fn root() -> impl Responder {
@@ -97,7 +99,10 @@ async fn main() -> std::io::Result<()> {
             .app_data(state_move)
             .app_data(qs_config)
             .service(root)
-            .service(web::scope("/u").configure(user::config))
+            .configure(friend::config)
+            .configure(playlist::config)
+            .configure(safety::config)
+            .configure(user::config)
     })
     .bind(("0.0.0.0", 80))?
     .run()
